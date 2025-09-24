@@ -19,9 +19,10 @@ export class DeleteUserUseCase {
 
     if (!user) throw new UserNotFoundError();
 
-    if (actorId !== id && actor.role !== "ADMIN") {
-      throw new NotAllowedError();
-    }
+    const isSelfDelete = actor.id === user.id;
+    const isAdmin = actor.role === "ADMIN";
+
+    if (!isSelfDelete && !isAdmin) throw new NotAllowedError();
 
     await this.usersRepository.delete(id);
   }

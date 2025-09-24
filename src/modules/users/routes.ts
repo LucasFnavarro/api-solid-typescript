@@ -1,11 +1,11 @@
 import type { FastifyInstance } from "fastify";
-import { register } from "./controllers/register.js";
-import { authenticate } from "./controllers/authenticate.js";
-import { getProfile } from "./controllers/get-profile.js";
+import { register } from "./controllers/register-user.controller.js";
+import { authenticate } from "./controllers/authenticate-user.controller.js";
+import { getProfile } from "./controllers/get-profile-user.controller.js";
 import { verifyJWT } from "../../middlewares/verify-jwt.js";
-import { update } from "./controllers/update.js";
-import { deleteUser } from "./controllers/delete-user.js";
-import { uploadAvatar } from "./controllers/upload-avatar.js";
+import { update } from "./controllers/update-user.controller.js";
+import { deleteUser } from "./controllers/delete-user.controller.js";
+import { uploadAvatar } from "./controllers/upload-avatar-user.controller.js";
 
 export function usersRoutes(app: FastifyInstance) {
   // criar usuário

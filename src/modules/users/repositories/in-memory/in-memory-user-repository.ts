@@ -16,8 +16,12 @@ export class InMemoryUserRepository implements IUsersRepository {
     return this.items;
   }
 
-  update(id: string, data: Partial<User>): Promise<User> {
-    throw new Error("Method not implemented.");
+  async update(id: string, data: Partial<User>): Promise<User> {
+    const user = this.items.find((user) => user.id === id);
+
+    if (!user) return null;
+
+    
   }
 
   async findById(id: string): Promise<User | null> {
@@ -38,11 +42,11 @@ export class InMemoryUserRepository implements IUsersRepository {
 
   async create(data: Prisma.UserCreateInput): Promise<User> {
     const user: User = {
-      id: crypto.randomUUID(),
+      id: data.id || crypto.randomUUID(),
       name: data.name,
       email: data.email,
       password: data.password,
-      role: Role.CLIENT,
+      role: data.role || Role.CLIENT,
       phone: data.phone || null,
       image_url: data.image_url || null,
       createdAt: new Date(),
@@ -54,7 +58,12 @@ export class InMemoryUserRepository implements IUsersRepository {
     return user;
   }
 
-  delete(id: string): Promise<User | null> {
-    throw new Error("Method not implemented.");
+  async delete(id: string): Promise<User | null> {
+    const index = this.items.findIndex((user) => user.id === id);
+
+    if (index === -1) return null;
+
+    const [deleted] = this.items.splice(index, 1);
+    return deleted ?? null;
   }
 }
