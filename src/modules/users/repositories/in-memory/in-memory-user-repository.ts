@@ -8,20 +8,8 @@ import type { IUsersRepository } from "../users-repository.js";
 export class InMemoryUserRepository implements IUsersRepository {
   public items: User[] = [];
 
-  updateAvatar(id: string, imageUrl: string): Promise<any> {
-    throw new Error("Method not implemented.");
-  }
-
   async getAll(): Promise<User[]> {
     return this.items;
-  }
-
-  async update(id: string, data: Partial<User>): Promise<User> {
-    const user = this.items.find((user) => user.id === id);
-
-    if (!user) return null;
-
-    
   }
 
   async findById(id: string): Promise<User | null> {
@@ -54,6 +42,37 @@ export class InMemoryUserRepository implements IUsersRepository {
     };
 
     this.items.push(user);
+
+    return user;
+  }
+
+  async update(id: string, data: Prisma.UserUpdateInput): Promise<User> {
+    const user = this.items.find((user) => user.id === id);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    user.name = typeof data.name === "string" ? data.name : user.name;
+    user.email = typeof data.email === "string" ? data.email : user.email;
+    user.password =
+      typeof data.password === "string" ? data.password : user.password;
+    user.phone = typeof data.phone === "string" ? data.phone : user.phone;
+    user.image_url =
+      typeof data.image_url === "string" ? data.image_url : user.image_url;
+
+    user.updatedAt = new Date();
+
+    return user;
+  }
+
+  async updateAvatar(id: string, imageUrl: string): Promise<any> {
+    const user = this.items.find((user) => user.id === id);
+
+    if (!user) return null;
+
+    user.image_url = imageUrl;
+    user.updatedAt = new Date();
 
     return user;
   }

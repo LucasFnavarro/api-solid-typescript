@@ -23,7 +23,7 @@ export class UploadAvatarProfileUseCase {
     }
 
     const imageUrl = await uploadCloudinary(fileBuffer, fileName);
-
+    
     const user = await this.usersRepository.updateAvatar(id, imageUrl);
 
     return {

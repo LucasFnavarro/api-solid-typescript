@@ -9,7 +9,7 @@ interface UpdateUserUseCaseRequest {
   email?: string;
   password?: string;
   phone?: string;
-  image_url?: string;
+  // image_url?: string;
 }
 
 export class UpdateUserUseCase {
@@ -21,15 +21,14 @@ export class UpdateUserUseCase {
     email,
     password,
     phone,
-    image_url,
+    // image_url,
   }: UpdateUserUseCaseRequest) {
     const user = await this.usersRepository.findById(id);
 
     if (!user) {
       throw new UserNotFoundError();
     }
-
-    // verificar email
+    
     if (email && email !== user.email) {
       const existing = await this.usersRepository.findByEmail(email);
       if (existing) throw new UserAlreadyExistsError();
@@ -43,7 +42,7 @@ export class UpdateUserUseCase {
     if (email !== undefined) updateData.email = email;
     if (password !== undefined) updateData.password = await hash(password, 10);
     if (phone !== undefined) updateData.phone = phone;
-    if (image_url !== undefined) updateData.image_url = image_url;
+    // if (image_url !== undefined) updateData.image_url = image_url;
 
     const userUpdate = await this.usersRepository.update(id, updateData);
 

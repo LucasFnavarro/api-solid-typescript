@@ -26,7 +26,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
 
     return reply
       .status(200)
-      .send({ message: "User update successfully.", updateUser });
+      .send({ message: "Conta atualizada com sucesso.", updateUser });
   } catch (err) {
     if (
       err instanceof UserNotFoundError ||

@@ -5,7 +5,7 @@ export interface IUsersRepository {
   findById(id: string): Promise<User | null>;
   getAll(): Promise<User[]>;
   create(data: Prisma.UserCreateInput): Promise<User>;
-  update(id: string, data: Partial<User>): Promise<User>;
+  update(id: string, data: Prisma.UserUpdateInput): Promise<User>;
   updateAvatar(id: string, imageUrl: string): Promise<any>;
   delete(id: string): Promise<User | null>;
 }
