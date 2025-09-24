@@ -1,4 +1,4 @@
-import { UserSNotFoundError } from "../errors/users-not-found-error.js";
+import { UsersNotFoundError } from "../errors/users-not-found-error.js";
 import type { IUsersRepository } from "../repositories/users-repository.js";
 
 export class GetAllUsersUseCase {
@@ -8,7 +8,7 @@ export class GetAllUsersUseCase {
     const users = await this.usersRepository.getAll();
 
     if (!users || users.length === 0) {
-      throw new UserSNotFoundError();
+      throw new UsersNotFoundError();
     }
 
     return {

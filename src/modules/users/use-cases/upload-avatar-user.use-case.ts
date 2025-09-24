@@ -11,7 +11,11 @@ interface UploadAvatarProfileUseCaseRequest {
 export class UploadAvatarProfileUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  async execute({ id, fileBuffer, fileName }: UploadAvatarProfileUseCaseRequest) {
+  async execute({
+    id,
+    fileBuffer,
+    fileName,
+  }: UploadAvatarProfileUseCaseRequest) {
     const doesUserExists = await this.usersRepository.findById(id);
 
     if (!doesUserExists) {

@@ -12,8 +12,8 @@ export class InMemoryUserRepository implements IUsersRepository {
     throw new Error("Method not implemented.");
   }
 
-  getAll(): Promise<User[]> {
-    throw new Error("Method not implemented.");
+  async getAll(): Promise<User[]> {
+    return this.items;
   }
 
   update(id: string, data: Partial<User>): Promise<User> {
