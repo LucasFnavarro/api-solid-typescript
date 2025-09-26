@@ -14,7 +14,7 @@ export async function getAllProduct(_: FastifyRequest, reply: FastifyReply) {
     });
   } catch (err) {
     if (err instanceof ProductNotFoundError) {
-      return reply.status(400).send({ message: err.message });
+      return reply.status(401).send({ message: err.message });
     }
 
     return reply
