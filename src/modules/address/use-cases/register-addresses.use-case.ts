@@ -1,4 +1,5 @@
 import type { Address } from "../../../../generated/prisma/index.js";
+import { ErrorCreatedAddressesUserError } from "../errors/error-created-addresses-user-error.js";
 import type { IAddressInterface } from "../repositories/address-repository.js";
 
 interface RegisterAddressUseCaseRequest {
@@ -44,7 +45,7 @@ export class RegisterAddressUseCase {
     });
 
     if (!address) {
-      throw new Error("error ao criar um novo endereço");
+      throw new ErrorCreatedAddressesUserError();
     }
 
     return { address };

@@ -8,6 +8,7 @@ import { env } from "./env/index.js";
 import { usersRoutes } from "./modules/users/routes.js";
 import multipart from "@fastify/multipart";
 import { addressRoutes } from "./modules/address/routes.js";
+import { productRouts } from "./modules/product/routes.ts";
 
 export const app = fastify();
 
@@ -39,6 +40,7 @@ app.register(multipart, {
 // ROUTES
 app.register(usersRoutes, { prefix: "/user" });
 app.register(addressRoutes, { prefix: "/address" });
+app.register(productRouts, { prefix: "/product" });
 
 // ERROR HANDLER
 app.setErrorHandler((error, request, reply) => {

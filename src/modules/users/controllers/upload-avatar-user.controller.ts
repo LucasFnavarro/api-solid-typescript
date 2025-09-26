@@ -6,7 +6,6 @@ export async function uploadAvatar(
   reply: FastifyReply
 ) {
   const { id } = request.params as { id: string };
-
   const file = await request.file();
 
   if (!file) {

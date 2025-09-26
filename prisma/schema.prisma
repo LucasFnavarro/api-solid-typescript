@@ -50,3 +50,31 @@ model Address {
 
   @@map("address")
 }
+
+model Product {
+  id             String   @id @default(uuid())
+  name           String
+  description    String?
+  price          String
+  image_url      String?
+  available      Boolean?
+  is_combo       Boolean?
+  customizations String?
+
+  createdAt   DateTime @default(now())
+  category_id String
+  category    Category @relation(fields: [category_id], references: [id])
+
+  @@map("products")
+}
+
+model Category {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+
+  createdAt DateTime  @default(now())
+  Product   Product[]
+
+  @@map("categories")
+}

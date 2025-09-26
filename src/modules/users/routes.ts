@@ -13,6 +13,8 @@ export function usersRoutes(app: FastifyInstance) {
 
   // fazer login
   app.post("/auth", authenticate);
+
+  // atualizar avatar profile
   app.post("/:id/avatar-profile", { onRequest: [verifyJWT] }, uploadAvatar);
 
   // obter perfil auth
