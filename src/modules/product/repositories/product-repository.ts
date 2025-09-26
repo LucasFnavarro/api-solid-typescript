@@ -1,5 +1,7 @@
 import { Prisma, Product } from "../../../../generated/prisma/index.js";
 
 export interface IProductRepository {
-  create(data: Prisma.ProductCreateInput): Promise<Product>
+  create(data: Prisma.ProductUncheckedCreateInput): Promise<Product>;
+  getAll(): Promise<Product[]>;
+  getById(id: string): Promise<Product | null>;
 }

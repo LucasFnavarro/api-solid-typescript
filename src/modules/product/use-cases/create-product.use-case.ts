@@ -6,7 +6,7 @@ interface CreateProductUseCaseRequest {
   description: string;
   price: string;
   image_url: string;
-  category: string;
+  category_id: string;
   available: boolean;
   is_combo: boolean;
   customizations?: string | null;
@@ -20,7 +20,7 @@ export class CreateProductUseCase {
     description,
     price,
     image_url,
-    category,
+    category_id,
     available,
     is_combo,
     customizations,
@@ -30,9 +30,7 @@ export class CreateProductUseCase {
       description,
       price,
       image_url,
-      category: {
-        connect: { id: category },
-      },
+      category_id,
       available,
       is_combo,
       customizations,
