@@ -55,6 +55,7 @@ model Product {
   id             String   @id @default(uuid())
   name           String
   description    String?
+  slug           String?
   price          String
   image_url      String?
   available      Boolean?

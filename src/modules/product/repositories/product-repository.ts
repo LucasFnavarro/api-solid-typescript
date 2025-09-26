@@ -4,4 +4,5 @@ export interface IProductRepository {
   create(data: Prisma.ProductUncheckedCreateInput): Promise<Product>;
   getAll(): Promise<Product[]>;
   getById(id: string): Promise<Product | null>;
+  getBySlug(slug: string): Promise<Product | null>;
 }

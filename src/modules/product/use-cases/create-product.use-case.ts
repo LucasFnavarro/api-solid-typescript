@@ -1,4 +1,4 @@
-import { CreatedProductError } from "../errors/created-product-error.ts";
+import { CreatedProductError } from "../errors/create-product-error.ts";
 import { IProductRepository } from "../repositories/product-repository.ts";
 
 interface CreateProductUseCaseRequest {
@@ -6,6 +6,7 @@ interface CreateProductUseCaseRequest {
   description: string;
   price: string;
   image_url: string;
+  slug: string | null;
   category_id: string;
   available: boolean;
   is_combo: boolean;
@@ -20,6 +21,7 @@ export class CreateProductUseCase {
     description,
     price,
     image_url,
+    slug,
     category_id,
     available,
     is_combo,
@@ -30,6 +32,7 @@ export class CreateProductUseCase {
       description,
       price,
       image_url,
+      slug,
       category_id,
       available,
       is_combo,

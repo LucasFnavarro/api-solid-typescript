@@ -1,13 +1,15 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 import { makeCreateProductUseCase } from "../factories/make-create-product-use-case.ts";
-import { CreatedProductError } from "../errors/created-product-error.ts";
+import { createSlug } from "../../../utils/index.ts";
+import { CreatedProductError } from "../errors/create-product-error.ts";
 
 const bodyProductSchema = z.object({
   name: z.string(),
   description: z.string(),
   price: z.string(),
   image_url: z.string(),
+  slug: z.string().optional(),
   category_id: z.uuid(),
   available: z.boolean(),
   is_combo: z.boolean(),
@@ -23,11 +25,14 @@ export async function createProduct(
     description,
     price,
     image_url,
+    slug,
     category_id,
     available,
     is_combo,
     customizations,
   } = bodyProductSchema.parse(request.body);
+
+  const createSlugProduct = createSlug(name);
 
   try {
     const useCase = makeCreateProductUseCase();
@@ -37,8 +42,9 @@ export async function createProduct(
       description,
       price,
       image_url,
-      category_id,
+      slug: createSlugProduct,
       available,
+      category_id,
       is_combo,
       customizations,
     });
