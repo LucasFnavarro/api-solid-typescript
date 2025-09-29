@@ -47,4 +47,31 @@ export class PrismaUsersRepository implements IUsersRepository {
 
     return user ?? null;
   }
+
+  async saveActivationToken(
+    userId: string,
+    token: string,
+    expiresAt: Date
+  ): Promise<void> {
+    await prisma.user.update({
+      where: { id: userId },
+      data: { activationToken: token, tokenExpiresAt: expiresAt },
+    });
+  }
+
+  async removeActivationToken(userId: string): Promise<void> {
+    await prisma.user.update({
+      where: { id: userId },
+      data: { activationToken: null, tokenExpiresAt: null },
+    });
+  }
+
+  async findByActivationToken(token: string): Promise<User | null> {
+    return prisma.user.findFirst({
+      where: {
+        activationToken: token,
+        tokenExpiresAt: { gte: new Date() },
+      },
+    });
+  }
 }

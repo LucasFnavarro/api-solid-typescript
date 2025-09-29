@@ -3,8 +3,8 @@ import { env } from "./env/index.js";
 
 app
   .listen({
-    port: env.PORT,
+    port: env.PORT_APP,
   })
   .then(() => {
-    console.log(`🚀 Server is running on http://localhost:${env.PORT}`);
+    console.log(`🚀 Server is running on http://localhost:${env.PORT_APP}`);
   });

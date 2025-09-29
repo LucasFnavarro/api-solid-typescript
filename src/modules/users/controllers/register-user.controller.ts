@@ -1,5 +1,4 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import z from "zod";
 import { UserAlreadyExistsError } from "../errors/user-already-exists-error.js";
 import { makeRegisterUseCase } from "../factories/make-register-use-case.js";
 import { createUserSchema } from "../schemas/index.js";
@@ -16,6 +15,9 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       password,
       phone,
     });
+
+    
+
 
     return reply.status(201).send({
       message: "User created successfully",
